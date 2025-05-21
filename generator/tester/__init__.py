@@ -11,15 +11,22 @@ class Question:
         self.question = question
         self.answers = answers
         self.is_answered_correctly = False
+        self.user_answer = None
 
 
     def check_answer(self, answer):
+        #answer validation
         if len(self.answers) == 0:
             raise ValueError('No answers provided')
-        elif answer not in self.answers:
+        elif answer >= len(self.answers) or answer < 0:
             raise ValueError('Answer is not in the list of answers')
-        elif answer == self.answers[0]:
+
+        if answer == 0:
             self.is_answered_correctly = True
+            self.user_answer = answer
+        else:
+            self.is_answered_correctly = False
+            self.user_answer = answer
 
     def __repr__(self):
         return f'Question: {self.question}\nAnswers: {self.answers}\nCorrect: {self.is_answered_correctly}'
